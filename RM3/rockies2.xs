@@ -93,7 +93,7 @@ void main(void)
    */
 
    // Picks the map size
-   int playerTiles=23000;
+   int playerTiles=11500;
    int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
    rmSetMapSize(size, size);
@@ -113,38 +113,7 @@ void main(void)
 	// rmSetMapType("grass");
 
 	chooseMercs();
- 
-rmSetLightingSet("rockies");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","rockies");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
     // Define some classes. These are used later for constraints.
    int classPlayer=rmDefineClass("player");
    rmDefineClass("classPatch");
@@ -612,7 +581,7 @@ rmSetTriggerLoop(false);
 	// Define and place forests - west and east
 	int forestTreeID = 0;
 	
-	numTries=4*cNumberNonGaiaPlayers;  // DAL - 3 here, 3 below
+	numTries=2*cNumberNonGaiaPlayers;  // DAL - 3 here, 3 below
 	failCount=0;
 	for (i=0; <numTries)
 	{   
@@ -648,7 +617,7 @@ rmSetTriggerLoop(false);
 			failCount=0; 
 	}
 
-	numTries=4*cNumberNonGaiaPlayers;  // DAL - 3 here, 3 above
+	numTries=2*cNumberNonGaiaPlayers;  // DAL - 3 here, 3 above
 	failCount=0;
 	for (i=0; <numTries)
 	{   
@@ -788,6 +757,17 @@ rmSetTriggerLoop(false);
 		rmPlaceObjectDefInArea(nuggetID, 0, centralValleyID, 1);
 	}
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

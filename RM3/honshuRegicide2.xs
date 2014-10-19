@@ -34,8 +34,7 @@ include "ypKOTHInclude.xs";
   string patchType2 = "coastal_japan\ground_grass1_co_japan";
   
   string lightingType = "Honshu";
-
-
+  
   // Initialize constraints for use in placement functions. Have to be defined above where they used in the script for compiler to accept them.
 
   int classSmallIsland = 0;
@@ -285,6 +284,17 @@ int sfBuildBigIsland (string bigIslandName = "", float x_loc = 0.0, float y_loc 
     //~ socketLoc = rmGetTradeRouteWayPoint(tradeRouteID, 0.8);
     //~ rmPlaceObjectDefAtPoint(socketID, 0, socketLoc);
     
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
     // check for KOTH game mode
     if(rmGetIsKOTH()) {
       
@@ -377,11 +387,11 @@ void main(void)
 	chooseMercs();
 	
 	// Set size of map
-	int playerTiles=70000;
+	int playerTiles=35000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 65000;
+		playerTiles = 32500;
 	if (cNumberNonGaiaPlayers >7)
-		playerTiles = 62000;
+		playerTiles = 31000;
   
   if(cNumberTeams > 2)
     playerTiles = playerTiles*1.4;
@@ -398,37 +408,8 @@ void main(void)
 	rmSetMapType(mapType1);
 	rmSetMapType("grass");
 	rmSetMapType("water");
-rmSetLightingSet("honshu");
+	rmSetLightingSet(lightingType);
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","honshu");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-    
 	// Initialize map.
 	rmTerrainInitialize(baseTerrain);
 
@@ -986,7 +967,7 @@ rmSetTriggerLoop(false);
 	rmPlaceObjectDefInArea(berriesID, 0, bigIslandID, cNumberNonGaiaPlayers*2); 
   
   // Forests
-  numTries=20*cNumberNonGaiaPlayers;
+  numTries=10*cNumberNonGaiaPlayers;
   int failCount=0;
 
   for (i=0; <numTries) {   

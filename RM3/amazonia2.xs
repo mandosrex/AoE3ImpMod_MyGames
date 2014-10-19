@@ -13,39 +13,6 @@ void main(void)
    // These status text lines are used to manually animate the map generation progress bar
    rmSetStatusText("",0.01);
 
-//day and night cycle
-
-rmSetLightingSet("amazon");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","amazon");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
    //only two natives appear on this map!
    int subCiv0=-1;
    int subCiv1=-1;
@@ -80,11 +47,11 @@ rmSetTriggerLoop(false);
 
    // Picks the map size
    // Picks the map size
-	int playerTiles = 22000;
+	int playerTiles = 11000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 20000;
+		playerTiles = 10000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 16000;			
+		playerTiles = 8000;			
 
    int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
@@ -166,6 +133,8 @@ rmSetTriggerLoop(false);
    int avoidResource=rmCreateTypeDistanceConstraint("resource avoid resource", "resource", 10.0);
    int avoidCoin=rmCreateTypeDistanceConstraint("avoid coin", "gold", 30.0);
    int avoidNugget=rmCreateTypeDistanceConstraint("nugget avoid nugget", "AbstractNugget", 60.0);
+    int avoidNuggetWater=rmCreateTypeDistanceConstraint("nugget vs. nugget water", "AbstractNugget", 80.0);
+  int avoidLand = rmCreateTerrainDistanceConstraint("ship avoid land", "land", true, 15.0);
    
    // Avoid impassable land
    int avoidImpassableLand=rmCreateTerrainDistanceConstraint("avoid impassable land", "Land", false, 4.0);
@@ -904,7 +873,7 @@ rmSetTriggerLoop(false);
    // Define and place Forests
    //ABC NEED TO BE SCATTERED BETWEEN THE TWO RIVERBANKS
    int forestTreeID = 0;
-   numTries=16*cNumberNonGaiaPlayers;
+   numTries=8*cNumberNonGaiaPlayers;
    failCount=0;
    for (i=0; <numTries)
       {   
@@ -964,6 +933,17 @@ rmSetTriggerLoop(false);
     rmEchoInfo("YLOC = "+(1.0-xLoc));
   }
 
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
  // Resources that can be placed after forests
   
   //Place fish
@@ -1020,4 +1000,18 @@ rmSetTriggerLoop(false);
    // Text
    rmSetStatusText("",1.0);
       
+  // Water nuggets
+  
+  int nuggetW= rmCreateObjectDef("nugget water"); 
+  rmAddObjectDefItem(nuggetW, "ypNuggetBoat", 1, 0.0);
+  rmSetNuggetDifficulty(5, 5);
+  rmSetObjectDefMinDistance(nuggetW, rmXFractionToMeters(0.0));
+  rmSetObjectDefMaxDistance(nuggetW, rmXFractionToMeters(0.5));
+  rmAddObjectDefConstraint(nuggetW, avoidLand);
+  rmAddObjectDefConstraint(nuggetW, avoidNuggetWater);
+  rmPlaceObjectDefAtLoc(nuggetW, 0, 0.5, 0.5, cNumberNonGaiaPlayers*4);
+    
+	// Text
+	rmSetStatusText("",0.99);
+
 }  

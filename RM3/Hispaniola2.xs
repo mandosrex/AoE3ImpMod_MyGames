@@ -58,11 +58,11 @@ void main(void)
 	}
 	
 	// Set size of map
-	int playerTiles=47000;
+	int playerTiles=23500;
 	if (cNumberNonGaiaPlayers >4)   // If more than 4 players...
-		playerTiles = 36000;		// ...give this many tiles per player.
+		playerTiles = 18000;		// ...give this many tiles per player.
 	if (cNumberNonGaiaPlayers >7)	// If more than 7 players...
-		playerTiles = 40000;		// ...give this many tiles per player.	
+		playerTiles = 20000;		// ...give this many tiles per player.	
 	int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
 	rmEchoInfo("Map size="+size+"m x "+size+"m");
 	rmSetMapSize(size, size);
@@ -75,38 +75,7 @@ void main(void)
 	rmSetMapType("grass");
 	rmSetMapType("water");
 	rmSetLightingSet("caribbean");
-//day and night cycle
 
-rmSetLightingSet("caribbean");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","caribbean");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
 	// Initialize map.
 	rmTerrainInitialize("water");
 
@@ -165,6 +134,7 @@ rmSetTriggerLoop(false);
 	int avoidRandomTurkeys=rmCreateTypeDistanceConstraint("avoid random turkeys", "turkey", 50.0);	//Attempting to spread them out more evenly.
 	int avoidNugget=rmCreateTypeDistanceConstraint("nugget avoid nugget", "abstractNugget", 54.0);  //Was 60.0 -- attempting to get more nuggets in south half of isle.
 	int avoidSheep=rmCreateTypeDistanceConstraint("sheep avoids sheep", "sheep", 120.0);  //Added sheep 11-28-05 JSB
+    int avoidNuggetWater=rmCreateTypeDistanceConstraint("nugget vs. nugget water", "AbstractNugget", 80.0);
 
 	// Avoid impassable land
 	int avoidImpassableLand=rmCreateTerrainDistanceConstraint("avoid impassable land", "Land", false, 5.0);
@@ -515,7 +485,7 @@ rmSetTriggerLoop(false);
 	// ***************** SCATTERED RESOURCES **************************************
 	// Scattered FORESTS
    int forestTreeID = 0;
-   numTries=20*cNumberNonGaiaPlayers;
+   numTries=10*cNumberNonGaiaPlayers;
    int failCount=0;
    for (i=0; <numTries)
       {   
@@ -597,6 +567,17 @@ rmSetTriggerLoop(false);
 
 	// Define and place Nuggets
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     
@@ -663,6 +644,20 @@ rmSetTriggerLoop(false);
 	rmAddObjectDefConstraint(sheepID, smallMesaConstraint);
 	rmAddObjectDefConstraint(sheepID, avoidImpassableLand);
 	rmPlaceObjectDefAtLoc(sheepID, 0, 0.46, 0.48, cNumberNonGaiaPlayers*1);
+
+  // Water nuggets
+  
+  int nuggetW= rmCreateObjectDef("nugget water"); 
+  rmAddObjectDefItem(nuggetW, "ypNuggetBoat", 1, 0.0);
+  rmSetNuggetDifficulty(5, 5);
+  rmSetObjectDefMinDistance(nuggetW, rmXFractionToMeters(0.0));
+  rmSetObjectDefMaxDistance(nuggetW, rmXFractionToMeters(0.5));
+  rmAddObjectDefConstraint(nuggetW, avoidLand);
+  rmAddObjectDefConstraint(nuggetW, avoidNuggetWater);
+  rmPlaceObjectDefAtLoc(nuggetW, 0, 0.5, 0.5, cNumberNonGaiaPlayers*4);
+    
+	// Text
+	rmSetStatusText("",0.99);
 
     // --------------- Make load bar move. ----------------------------------------------------------------------------
 	rmSetStatusText("",0.90);

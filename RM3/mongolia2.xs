@@ -36,38 +36,7 @@ void main(void)
   string herdable2 = "ypYak";
   
   string lightingType = "Mongolia";
- 
-rmSetLightingSet("Mongolia");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Mongolia");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-    
+  
    //Chooses which natives appear on the map
    int subCiv0=-1;
    int subCiv1=-1;
@@ -92,11 +61,11 @@ rmSetTriggerLoop(false);
    }
 
    // Picks the map size
-	int playerTiles=24000;
+	int playerTiles=12000;
   if (cNumberNonGaiaPlayers >4)
-		playerTiles = 21000;
+		playerTiles = 10500;
   if (cNumberNonGaiaPlayers >6)
-      playerTiles = 18000;
+      playerTiles = 9000;
    
   if(cNumberTeams > 2)
     playerTiles = playerTiles*1.8;
@@ -866,7 +835,7 @@ rmSetTriggerLoop(false);
 
    // Forests
   int count = 0;
-  int maxCount = 16 * cNumberNonGaiaPlayers;
+  int maxCount = 8 * cNumberNonGaiaPlayers;
   int maxFailCount = 6;
   failCount = 0;
   
@@ -951,6 +920,17 @@ rmSetTriggerLoop(false);
     }
   }
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <12 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

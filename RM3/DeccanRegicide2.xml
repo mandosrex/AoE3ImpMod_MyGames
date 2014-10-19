@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version = "1.0" encoding = "UTF-8"?>
 <mapinfo details = "130049" imagepath="ui\random_map\deccan"  displayNameID = "130048" cannotReplace = ""
 loadDetails="130050" 
 loadBackground="ui\random_map\deccan\deccan_map">

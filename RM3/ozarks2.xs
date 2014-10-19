@@ -14,7 +14,7 @@ void main(void)
 	// Which map - four possible variations (excluding which end the players start on, which is a separate thing)
 
    // Picks the map size
-   int playerTiles=20000;		
+   int playerTiles=10000;		
    int size=2.1*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
    rmSetMapSize(size, size);
@@ -29,38 +29,7 @@ void main(void)
 	rmSetMapType("grass");
 	rmSetMapType("land");
    rmSetLightingSet("texas");
- 
-rmSetLightingSet("texas");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","texas");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
 	// Make the corners.
 	rmSetWorldCircleConstraint(true);
 
@@ -767,9 +736,9 @@ rmSetTriggerLoop(false);
 	// Forest areas
 
 	if (cNumberNonGaiaPlayers > 4)
-		numTries=6*cNumberNonGaiaPlayers;
+		numTries=3*cNumberNonGaiaPlayers;
 	else
-		numTries=10*cNumberNonGaiaPlayers;
+		numTries=5*cNumberNonGaiaPlayers;
 	failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -804,9 +773,9 @@ rmSetTriggerLoop(false);
 		}
 
 	if (cNumberNonGaiaPlayers > 4)
-		numTries=6*cNumberNonGaiaPlayers;
+		numTries=3*cNumberNonGaiaPlayers;
 	else
-		numTries=6*cNumberNonGaiaPlayers; 
+		numTries=5*cNumberNonGaiaPlayers; 
 	failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -840,7 +809,7 @@ rmSetTriggerLoop(false);
 				failCount=0; 
 		}
 
-	numTries=12*cNumberNonGaiaPlayers;  
+	numTries=6*cNumberNonGaiaPlayers;  
 	failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -878,6 +847,17 @@ rmSetTriggerLoop(false);
 
 	// Text
 	
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

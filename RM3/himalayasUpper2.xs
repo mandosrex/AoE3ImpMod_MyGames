@@ -53,7 +53,7 @@ void main(void)
     rmSetSubCiv(1, nativeCiv2);
 
    // Picks the map size
-   int playerTiles=23000;
+   int playerTiles=11500;
    int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
    rmSetMapSize(size, size);
@@ -73,39 +73,6 @@ void main(void)
 
   chooseMercs();
 
-//day and night cycle
-
-rmSetLightingSet("Himalayas");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Himalayas");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
     // Define some classes. These are used later for constraints.
 
   int classPlayer=rmDefineClass("player");
@@ -558,7 +525,7 @@ rmSetTriggerLoop(false);
   // Define and place forests
   int forestTreeID = 0;
   
-  numTries = 30 * cNumberNonGaiaPlayers;
+  numTries = 15 * cNumberNonGaiaPlayers;
   failCount=0;
 
   for (i=0; <numTries) {   
@@ -731,6 +698,17 @@ rmSetTriggerLoop(false);
   rmSetNuggetDifficulty(4, 4);
   rmPlaceObjectDefPerPlayer(nuggetID3, false, 1);
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
     // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

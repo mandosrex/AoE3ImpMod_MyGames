@@ -32,7 +32,9 @@ include "ypKOTHInclude.xs";
   string patchTerrain = "coastal_japan\ground_grass3_co_japan";
   string patchType1 = "coastal_japan\ground_grass2_co_japan";
   string patchType2 = "coastal_japan\ground_grass1_co_japan";
-
+  
+  string lightingType = "Honshu";
+  
   // Initialize constraints for use in placement functions. Have to be defined above where they used in the script for compiler to accept them.
 
   int classSmallIsland = 0;
@@ -65,8 +67,6 @@ include "ypKOTHInclude.xs";
   int huntCounter = 0;
   float randomIslandStuff = 0.0;
 
-
-  
 //places mines on the extra islands
 void sfIslandGold (int islandID = 0, string mineType = "mine", int mineCount = 1)
 {
@@ -282,6 +282,17 @@ int sfBuildBigIsland (string bigIslandName = "", float x_loc = 0.0, float y_loc 
     vector socketLoc = rmGetTradeRouteWayPoint(tradeRouteID, 0.5);
     rmPlaceObjectDefAtPoint(socketID, 0, socketLoc);  
     
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
       // check for KOTH game mode
     if(rmGetIsKOTH()) {
       
@@ -374,11 +385,11 @@ void main(void)
 	chooseMercs();
 	
 	// Set size of map
-	int playerTiles=58000;
+	int playerTiles=29000;
 	if (cNumberNonGaiaPlayers >4)   // If more than 4 players...
-		playerTiles = 48000;		// ...give this many tiles per player.
+		playerTiles = 24000;		// ...give this many tiles per player.
 	if (cNumberNonGaiaPlayers >7)	// If more than 7 players...
-		playerTiles = 47000;		// ...give this many tiles per player.	
+		playerTiles = 23500;		// ...give this many tiles per player.	
 	int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
 	rmEchoInfo("Map size="+size+"m x "+size+"m");
 	rmSetMapSize(size, size);
@@ -391,6 +402,7 @@ void main(void)
 	rmSetMapType(mapType1);
 	rmSetMapType("grass");
 	rmSetMapType("water");
+	rmSetLightingSet(lightingType);
 
 	// Initialize map.
 	rmTerrainInitialize(baseTerrain);
@@ -407,38 +419,6 @@ void main(void)
 	rmDefineClass("natives");
 	rmDefineClass("classSocket");
   rmDefineClass("classPatch");
-//day and night cycle
-
-rmSetLightingSet("honshu");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","honshu");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
 
    // -------------Define constraints----------------------------------------
   avoidAll=rmCreateTypeDistanceConstraint("avoid all", "all", 4.0);    

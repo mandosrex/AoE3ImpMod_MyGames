@@ -51,12 +51,12 @@ void main(void)
 	}			
 
    // Picks the map size
-   //int playerTiles=28800; // OLD SIZE
-   int playerTiles = 22000;
+   //int playerTiles=14400; // OLD SIZE
+   int playerTiles = 11000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 18000;
+		playerTiles = 9000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 14000;		
+		playerTiles = 7000;		
    int size=1.8*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
    rmSetMapSize(size, size);
@@ -64,39 +64,6 @@ void main(void)
    // Picks a default water height
    rmSetSeaLevel(1.0);
    rmSetLightingSet("Bayou");
-
-//day and night cycle
-
-rmSetLightingSet("Bayou");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Bayou");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
 
    // Picks default terrain and water
 
@@ -608,6 +575,17 @@ if ( cNumberTeams == 2 )
 
 // *********************************** TREASURES *******************************
     
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     
@@ -766,7 +744,7 @@ if ( cNumberTeams == 2 )
 
    // Define and place Forests
    int forestTreeID = 0;
-   int numTries=10*cNumberNonGaiaPlayers;
+   int numTries=5*cNumberNonGaiaPlayers;
    int failCount=0;
    for (i=0; <numTries)
       {   

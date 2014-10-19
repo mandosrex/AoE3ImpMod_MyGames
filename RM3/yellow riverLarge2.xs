@@ -32,7 +32,7 @@ void main(void)
   string huntable3 = "ypMarcoPoloSheep";
   
   string lightingType = "yellow_river_dry";
-
+  
   string tradeRouteType = "water";
   
   string nativeOne = "Shaolin";
@@ -109,11 +109,11 @@ void main(void)
   }
 
 // Basic map stuff
-	int playerTiles = 40000;
+	int playerTiles = 20000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 38000;
+		playerTiles = 19000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 36000;
+		playerTiles = 18000;
 
 	int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
 	rmEchoInfo("Map size="+size+"m x "+size+"m");
@@ -125,38 +125,7 @@ void main(void)
 	// Picks a default water height
 	rmSetSeaLevel(1.0);
 	rmSetLightingSet(lightingType);
-  
-rmSetLightingSet("yellow_river_dry");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","yellow_river_dry");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-    
    // Picks default terrain and water
 	rmSetSeaType(riverType);
 	rmSetBaseTerrainMix(baseMix);
@@ -944,6 +913,17 @@ rmSetTriggerLoop(false);
 	int waterSpawnPointID = 0;
 	rmClearClosestPointConstraints();
 
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     
@@ -1074,7 +1054,7 @@ rmSetTriggerLoop(false);
 	int numTries=10*cNumberNonGaiaPlayers;
   
   if (cNumberNonGaiaPlayers > 4)
-    numTries = 12 * cNumberNonGaiaPlayers;
+    numTries = 6 * cNumberNonGaiaPlayers;
   
 	int failCount=0;
   

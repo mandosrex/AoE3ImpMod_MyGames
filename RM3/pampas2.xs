@@ -38,15 +38,15 @@ void main(void)
 	}
 
 // *************************** MAP PARAMETERS **************************
-   //int playerTiles=22000;		// OLD SIZE
-	int playerTiles = 20000;
+   //int playerTiles=11000;		// OLD SIZE
+	int playerTiles = 10000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 16000;
+		playerTiles = 8000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 12000;		
+		playerTiles = 6000;		
 	if(cMapSize == 1)
 	{
-		playerTiles = 30000;			// DAL modified from 18K
+		playerTiles = 15000;			// DAL modified from 18K
 		rmEchoInfo("Large map");
 	}
 	int size=1.7*sqrt(cNumberNonGaiaPlayers*playerTiles);
@@ -61,38 +61,7 @@ void main(void)
 	// Picks a default water height
 	rmSetSeaLevel(5.0);
 	rmSetLightingSet("Pampas");
- 
-rmSetLightingSet("Pampas");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Pampas");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
    // Picks default terrain and water
 	rmSetSeaType("Pampas River");
 	rmSetBaseTerrainMix("pampas_dirt");
@@ -564,7 +533,7 @@ rmSetTriggerLoop(false);
 	rmSetObjectDefMinDistance(startingUnits, 5.0);
     rmSetObjectDefMaxDistance(startingUnits, 10.0);
 	rmAddObjectDefConstraint(startingUnits, avoidAll);
-	rmAddObjectDefConstraint(startingUnits, avoidResource);
+	//rmAddObjectDefConstraint(startingUnits, avoidResource);
 	rmAddObjectDefConstraint(startingUnits, avoidImpassableLand);
 	//rmAddObjectDefConstraint(startingUnits, avoidWater);
 	//rmPlaceObjectDefPerPlayer(startingUnits, true);
@@ -873,7 +842,7 @@ for (i=0; <10)
 // ********************** FORESTS *************************
 	int forestTreeID = 0;
 	
-	int numTries=20*cNumberNonGaiaPlayers;  // DAL - 3 here, 3 below
+	int numTries=10*cNumberNonGaiaPlayers;  // DAL - 3 here, 3 below
 	int failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -911,7 +880,7 @@ for (i=0; <10)
 
 	
 /* 
-numTries=16*cNumberNonGaiaPlayers;  // DAL - 3 here, three above.
+numTries=8*cNumberNonGaiaPlayers;  // DAL - 3 here, three above.
 	failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -1142,6 +1111,17 @@ numTries=16*cNumberNonGaiaPlayers;  // DAL - 3 here, three above.
 		rmPlaceObjectDefAtLoc(nuggetID, 0, 0.5, 0.5);
 	}
 */
+
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
 
   // check for KOTH game mode
   if(rmGetIsKOTH()) {

@@ -42,38 +42,7 @@ void main(void)
   huntable2 = "ypSaiga";   
   lightingType = "great lakes winter";
   tradeRouteType = "water";
- 
-rmSetLightingSet("great lakes winter");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","great lakes winter");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   		
+	
 // Map Basics
 
   bool weird = false;
@@ -83,11 +52,11 @@ rmSetTriggerLoop(false);
   if (cNumberTeams > 2 || (teamZeroCount - teamOneCount) > 2 || (teamOneCount - teamZeroCount) > 2)
     weird = true;
     
-	int playerTiles = 52000;
+	int playerTiles = 26000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles =50000;
+		playerTiles =25000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 48000;
+		playerTiles = 24000;
     
   if (weird == true) 
     playerTiles = playerTiles*1.75;
@@ -555,7 +524,7 @@ rmSetTriggerLoop(false);
 // Forests
 	int forestTreeID = 0;
 	
-	int numTries=20*cNumberNonGaiaPlayers; 
+	int numTries=10*cNumberNonGaiaPlayers; 
 	int failCount=0;
 	for (i=0; <numTries)	{   
     int forestID=rmCreateArea("forest"+i);
@@ -664,6 +633,17 @@ rmSetTriggerLoop(false);
   rmAddObjectDefConstraint(nugget4, playerConstraintNugget);
   rmAddObjectDefConstraint(nugget4, circleConstraint);
   rmPlaceObjectDefAtLoc(nugget4, 0, 0.5, 0.5, rmRandInt(2,3));
+
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <16 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
 
 // check for KOTH game mode
   if(rmGetIsKOTH()) {

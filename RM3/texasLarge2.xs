@@ -84,9 +84,9 @@ void main(void)
 	}
 
 	// Picks the map size
-	int playerTiles=40000;
+	int playerTiles=20000;
 	// if (cNumberNonGaiaPlayers >4)
-	//	playerTiles = 37000;
+	//	playerTiles = 19500;
 
 	int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
 	rmEchoInfo("Map size="+size+"m x "+size+"m");
@@ -98,38 +98,7 @@ void main(void)
 	// Picks a default water height
 	rmSetSeaLevel(4.0);
 	rmSetLightingSet("Texas");
- 
-rmSetLightingSet("Texas");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Texas");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
    // Picks default terrain and water
 	rmSetSeaType("Amazon River");
 	rmSetBaseTerrainMix("texas_grass");
@@ -1035,7 +1004,7 @@ rmSetTriggerLoop(false);
 	// Define and place forests - north and south
 	int forestTreeID = 0;
 	
-	numTries=10*cNumberNonGaiaPlayers;  // DAL - 5 here, 5 below
+	numTries=5*cNumberNonGaiaPlayers;  // DAL - 5 here, 5 below
 	failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -1071,7 +1040,7 @@ rmSetTriggerLoop(false);
 				failCount=0; 
 		}
 
-	numTries=10*cNumberNonGaiaPlayers;  // DAL - 5 here, 5 above.
+	numTries=5*cNumberNonGaiaPlayers;  // DAL - 5 here, 5 above.
 	failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -1163,6 +1132,17 @@ rmSetTriggerLoop(false);
 
 	// */
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <16 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

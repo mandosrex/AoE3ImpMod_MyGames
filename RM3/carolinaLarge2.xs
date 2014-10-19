@@ -56,11 +56,11 @@ void main(void)
 
 
    // Picks the map size
-	int playerTiles = 50000;
+	int playerTiles = 25000;
 	if (cNumberNonGaiaPlayers >4)
-		 playerTiles = 46000;
+		 playerTiles = 23000;
 	if (cNumberNonGaiaPlayers >6)
-		 playerTiles = 42000;			
+		 playerTiles = 21000;			
 
    int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
@@ -79,39 +79,6 @@ void main(void)
 	rmSetMapType("grass");
    rmSetLightingSet("carolina");
 
-//day and night cycle
-
-rmSetLightingSet("carolina");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","carolina");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
    // Define some classes. These are used later for constraints.
    int classPlayer=rmDefineClass("player");
    rmDefineClass("classCliff");
@@ -159,6 +126,8 @@ rmSetTriggerLoop(false);
 	int avoidSheep=rmCreateTypeDistanceConstraint("sheep avoids sheep", "sheep", 40.0);
 	int avoidFastCoin=rmCreateTypeDistanceConstraint("fast coin avoids coin", "gold", 40.0);
    int avoidNugget=rmCreateTypeDistanceConstraint("nugget avoid nugget", "abstractNugget", 30.0);
+    int avoidNuggetWater=rmCreateTypeDistanceConstraint("nugget vs. nugget water", "AbstractNugget", 80.0);
+   int avoidLand = rmCreateTerrainDistanceConstraint("ship avoid land", "land", true, 15.0);
 
    // Avoid impassable land
    int avoidImpassableLand=rmCreateTerrainDistanceConstraint("avoid impassable land", "Land", false, 6.0);
@@ -755,6 +724,17 @@ rmSetTriggerLoop(false);
 
 	// Place extra nuggets not per player
     
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <16 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     
@@ -812,7 +792,7 @@ rmSetTriggerLoop(false);
 
    // FORESTS
    int forestTreeID = 0;
-   int numTries=12*cNumberNonGaiaPlayers;
+   int numTries=6*cNumberNonGaiaPlayers;
    int failCount=0;
    for (i=0; <numTries)
       {   
@@ -853,5 +833,18 @@ rmSetTriggerLoop(false);
    // Text
    rmSetStatusText("",1.0); 
 	
-      
+  // Water nuggets
+  
+  int nuggetW= rmCreateObjectDef("nugget water"); 
+  rmAddObjectDefItem(nuggetW, "ypNuggetBoat", 1, 0.0);
+  rmSetNuggetDifficulty(5, 5);
+  rmSetObjectDefMinDistance(nuggetW, rmXFractionToMeters(0.0));
+  rmSetObjectDefMaxDistance(nuggetW, rmXFractionToMeters(0.5));
+  rmAddObjectDefConstraint(nuggetW, avoidLand);
+  rmAddObjectDefConstraint(nuggetW, avoidNuggetWater);
+  rmPlaceObjectDefAtLoc(nuggetW, 0, 0.5, 0.5, cNumberNonGaiaPlayers*4);
+    
+	// Text
+	rmSetStatusText("",0.99);
+
 }  

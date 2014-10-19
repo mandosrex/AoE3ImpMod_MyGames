@@ -63,15 +63,15 @@ void main(void)
 // ********************* MAP PARAMETERS ************************
 	// Picks the map size
 	//  int playerTiles=10000; old setting
-	int playerTiles = 18000;
+	int playerTiles = 9000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 16000;
+		playerTiles = 8000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 12000;		
+		playerTiles = 6000;		
 	/*
    if(cMapSize == 1)
    {
-      playerTiles = 36000;
+      playerTiles = 18000;
       rmEchoInfo("Large map");
    }
    */
@@ -95,38 +95,7 @@ void main(void)
 	rmSetMapType("grass");
 	rmSetMapType("land");
 	rmSetLightingSet("Sonora");
- 
-rmSetLightingSet("Sonora");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Sonora");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   	
 	// Choose mercs.
 	chooseMercs();
 
@@ -376,6 +345,17 @@ if ( cNumberTeams == 2 )
 	// Text
 	rmSetStatusText("",0.8);
 
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
 	// ******************************* UBER MINE AT CENTER **************************************
 	float centerType = rmRandFloat(0.0, 1.0);
   // check for KOTH game mode
@@ -581,7 +561,7 @@ for(i=0; <numTries)
 // ************************************ FORESTS **************************************
 
 
-	for(i=0; <cNumberNonGaiaPlayers*30)
+	for(i=0; <cNumberNonGaiaPlayers*15)
 	{
 		int edgeForestID=rmCreateArea("edgeForest"+i);
 		rmSetAreaWarnFailure(edgeForestID, false);

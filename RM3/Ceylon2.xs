@@ -32,39 +32,6 @@ void main(void)
   string whale1 = "HumpbackWhale";
   string lightingType = "ceylon";
   
-//day and night cycle
-
-rmSetLightingSet("ceylon");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","ceylon");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
 	// Define Natives
 	int subCiv0=-1;
 	int subCiv1=-1;
@@ -89,9 +56,9 @@ rmSetTriggerLoop(false);
 	chooseMercs();
 	
 	// Set size of map
-	int playerTiles=36000;
+	int playerTiles=18000;
   if(cNumberNonGaiaPlayers < 5)
-    playerTiles = 44000;
+    playerTiles = 22000;
 	int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
 	rmEchoInfo("Map size="+size+"m x "+size+"m");
 	rmSetMapSize(size, size);
@@ -571,7 +538,7 @@ rmSetTriggerLoop(false);
 	// ***************** SCATTERED RESOURCES **************************************
 	// Scattered FORESTS
   int forestTreeID = 0;
-  numTries=20*cNumberNonGaiaPlayers;
+  numTries=10*cNumberNonGaiaPlayers;
   int failCount=0;
   for (i=0; <numTries)
   {   
@@ -672,6 +639,17 @@ rmSetTriggerLoop(false);
 
 	// Define and place Nuggets
     
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

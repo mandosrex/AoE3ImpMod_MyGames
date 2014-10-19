@@ -93,14 +93,14 @@ void main(void)
  	}
 
    // Picks the map size
-   //int playerTiles=24000;	// old settings
-	int playerTiles = 20000;
+   //int playerTiles=12000;	// old settings
+	int playerTiles = 10000;
 	if (cNumberNonGaiaPlayers == 2)
 		playerTiles = 12000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 18000;
+		playerTiles = 9000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 18000;		
+		playerTiles = 9000;		
  /*  if(cMapSize == 1)
    {
       playerTiles = 16000;			// DAL modified from 18K
@@ -119,34 +119,12 @@ void main(void)
 	rmSetSeaLevel(6.0);
    
    // LIGHT SET
-rmCreateTrigger("night");
-rmCreateTrigger("day");
 
-rmSetLightingSet("Great Lakes");
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Great Lakes");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
+	if (seasonPicker < 0.5)
+		rmSetLightingSet("Great Lakes");
+	else
+		rmSetLightingSet("Great Lakes Winter");
+
 
 	// Picks default terrain and water
 	if (seasonPicker < 0.5)
@@ -386,6 +364,17 @@ if (seasonPicker < 0.5)
 
    //mineType = rmRandInt(1,10);
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     
@@ -977,7 +966,7 @@ if (seasonPicker < 0.5)
 // Define and place forests - north and south
 	int forestTreeID = 0;
 	
-	numTries=10*cNumberNonGaiaPlayers;  // DAL - 4 here, 4 below
+	numTries=5*cNumberNonGaiaPlayers;  // DAL - 4 here, 4 below
 	failCount=0;
 	for (i=0; <numTries)
 		{   
@@ -1018,7 +1007,7 @@ if (seasonPicker < 0.5)
 		}
 
 	
-	numTries=10*cNumberNonGaiaPlayers;  // DAL - 4 here, 4 above.
+	numTries=5*cNumberNonGaiaPlayers;  // DAL - 4 here, 4 above.
 	failCount=0;
 	for (i=0; <numTries)
 		{   

@@ -1543,6 +1543,16 @@ void main(void)
 	// Text
 	rmSetStatusText("",0.99);
 
+for(i=1;<=cNumberNonGaiaPlayers) {
+   rmCreateTrigger("Tech Status"+i);
+   rmSwitchToTrigger(rmTriggerID("Tech Status"+i));
+   rmSetTriggerActive(true);
+   rmAddTriggerEffect("Set Tech Status");
+   rmSetTriggerEffectParamInt("PlayerID", i);
+   rmSetTriggerEffectParamInt("TechID", 9);  // HCBlockadeNative
+   rmSetTriggerEffectParamInt("Status", 2);
+}
+
 // add fish if ocean
 	if (placeWaterFlag == 1)
 	{

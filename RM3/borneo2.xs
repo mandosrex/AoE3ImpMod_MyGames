@@ -41,39 +41,6 @@ void main(void)
   bool weird = false;
   int teamZeroCount = rmGetNumberPlayersOnTeam(0);
 	int teamOneCount = rmGetNumberPlayersOnTeam(1);
-
-//day and night cycle
-
-rmSetLightingSet("Borneo");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Borneo");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
     
   // FFA and imbalanced teams
   if ( cNumberTeams > 2 || ((teamZeroCount - teamOneCount) > 2) || ((teamOneCount - teamZeroCount) > 2) )
@@ -99,11 +66,11 @@ rmSetTriggerLoop(false);
   }
 	
 // Map Basics
-	int playerTiles = 44000;
+	int playerTiles = 22000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 38000;
+		playerTiles = 19000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 31000;		
+		playerTiles = 16000;		
 
 	int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
 	rmEchoInfo("Map size="+size+"m x "+size+"m");
@@ -788,7 +755,7 @@ rmSetTriggerLoop(false);
 // Forests
 	int forestTreeID = 0;
 	
-	int numTries=20*cNumberNonGaiaPlayers; 
+	int numTries=10*cNumberNonGaiaPlayers; 
 	int failCount=0;
 	for (i=0; <numTries)	{   
     int forestID=rmCreateArea("foresta"+i, invisIslandID);
@@ -866,6 +833,17 @@ rmSetTriggerLoop(false);
 	// Text
 	rmSetStatusText("",0.85);
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
     // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

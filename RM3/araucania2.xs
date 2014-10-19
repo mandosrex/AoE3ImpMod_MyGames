@@ -1,32 +1,3 @@
-//********************************************************************************//
-
-/*
-
-ARAUCANIA
-KPM
-Age of Empires 3 - Warchiefs
-
-Araucania is a random map that encompasses modern day Chile. It is 
-rectangular with the long axis oriented from NW to SE. Each time the 
-script runs one of three variations will be seen - 
-   1. A northern desert region that is heavy on copper mines,
-   2. A central grassy region that has plentiful berries, hunting 
-      and herdables, or
-   3. A southern icy region that has a bunch of treasures.
-
-The coastline will also use one of three variants -
-   1. A large outcropping in the center of the coast,
-   2. A relatively straight line from NW to SE, or
-   3. A 'bay' in the center of the coast.
-
-Textures and starting resources should clue players in to which 
-variation the script has chosen.
-
-The native settlements here are Mapuche or Inca. The Mapuche are more common.
-
-*/
-
-//********************************************************************************//
 
 // PJJ - modifying script for YPack update
 
@@ -41,7 +12,7 @@ void main(void)
 
 // Map Setup
    // Setting up how big the map is and that it is rectangular
-   int playerTiles = 26500;
+   int playerTiles = 13250;
    int size = 1.4 * sqrt(cNumberNonGaiaPlayers * playerTiles);
    int longSide = 1.7 * size;
    
@@ -81,39 +52,6 @@ void main(void)
    string nativeName = "";
    string oceanName = "";
    string treeName = "";
-
-//day and night cycle
-
-rmSetLightingSet("NthAraucaniaLight");
-
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","NthAraucaniaLight");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
 
    // North Araucania variation stuff
    if(whichVariation == 1)
@@ -252,6 +190,8 @@ int classStartingUnits = rmDefineClass("Starting Units");
 
    // Avoid nuggets
    int avoidNugget = rmCreateTypeDistanceConstraint("nugget vs nugget", "abstractnugget", 20.0);
+   int avoidNuggetWater=rmCreateTypeDistanceConstraint("nugget vs. nugget water", "AbstractNugget", 80.0);
+   int avoidLand = rmCreateTerrainDistanceConstraint("ship avoid land", "land", true, 15.0);
    
    // Avoid starting units
    int avoidStartingUnits = rmCreateClassDistanceConstraint("Avoid starting units", classStartingUnits, 40.0);
@@ -945,14 +885,25 @@ int classStartingUnits = rmDefineClass("Starting Units");
 
       if(rmBuildArea(forestSouth) == false)
       {
-         // Stop trying once we fail 12 times in a row.
+         // Stop trying once we fail 6 times in a row.
          forestFailCount++;
-         if(forestFailCount == 12)
+         if(forestFailCount == 6)
             break;
       }
       else
          forestFailCount = 0; 
    }
+
+    // Place random flags
+    int avoidFlags2 = rmCreateTypeDistanceConstraint("flags avoid flags 2", "ControlFlag", 70);
+    for ( i =1; <13 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags2);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
 
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
@@ -1300,6 +1251,20 @@ int classStartingUnits = rmDefineClass("Starting Units");
    rmSetStatusText("",1.0);
 //********************************************************************************//
 
+  // Water nuggets
+  
+  int nuggetW= rmCreateObjectDef("nugget water"); 
+  rmAddObjectDefItem(nuggetW, "ypNuggetBoat", 1, 0.0);
+  rmSetNuggetDifficulty(5, 5);
+  rmSetObjectDefMinDistance(nuggetW, rmXFractionToMeters(0.0));
+  rmSetObjectDefMaxDistance(nuggetW, rmXFractionToMeters(0.5));
+  rmAddObjectDefConstraint(nuggetW, avoidLand);
+  rmAddObjectDefConstraint(nuggetW, avoidNuggetWater);
+  rmPlaceObjectDefAtLoc(nuggetW, 0, 0.5, 0.5, cNumberNonGaiaPlayers*4);
+    
+	// Text
+	rmSetStatusText("",0.99);
+
    // Nuggets - South HARD
    for (i = 0; < numberNuggetHardNutsPasses * cNumberNonGaiaPlayers)
    {
@@ -1316,5 +1281,4 @@ int classStartingUnits = rmDefineClass("Starting Units");
       rmSetNuggetDifficulty(3, 3);
       rmPlaceObjectDefAtLoc(southNuggetsHard, 0, 0.24, 0.2);
    }
-
 }

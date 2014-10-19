@@ -69,15 +69,15 @@ void main(void)
 // ********************* MAP PARAMETERS ************************
 	// Picks the map size
 	//  int playerTiles=10000; old setting
-	int playerTiles = 16000;
+	int playerTiles = 8000;
 	if (cNumberNonGaiaPlayers >4)
-		playerTiles = 18000;
+		playerTiles = 9000;
 	if (cNumberNonGaiaPlayers >6)
-		playerTiles = 20000;		
+		playerTiles = 10000;		
 /*
 	if(cMapSize == 1)
 	{
-      playerTiles = 36000;
+      playerTiles = 18000;
       rmEchoInfo("Large map");
 	}
 */
@@ -112,38 +112,7 @@ void main(void)
 	rmSetMapType("desert");
 	rmSetMapType("land");
 	rmSetLightingSet("Sonora");
- 
-rmSetLightingSet("Sonora");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","Sonora");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
 	// Choose mercs.
 	chooseMercs();
 
@@ -642,7 +611,7 @@ rmSetStatusText("",0.4);
 
 
 	
-	for(i=0; <cNumberNonGaiaPlayers*12)
+	for(i=0; <cNumberNonGaiaPlayers*6)
 	{
 		int edgeForestID=rmCreateArea("edgeForest"+i);
 		rmSetAreaWarnFailure(edgeForestID, false);
@@ -811,6 +780,17 @@ rmSetStatusText("",0.4);
 		rmAddObjectDefConstraint(nugget4, circleConstraint);
 		rmAddObjectDefConstraint(nugget4, shortAvoidImportantItem);			// Added New
 		rmPlaceObjectDefAtLoc(nugget4, 0, 0.5, 0.5, rmRandInt(0,3));
+
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
 
   // check for KOTH game mode
   if(rmGetIsKOTH()) {

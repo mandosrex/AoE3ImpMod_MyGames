@@ -15,11 +15,11 @@ void main(void)
    rmSetStatusText("",0.01);
 
    // *********************  Picks the map size, Map Lighting, Wind, Terrain, and Water  ****************
-   float playerTiles=25000;
+   float playerTiles=12800;
         if (cNumberNonGaiaPlayers >4)
-	        playerTiles = 21600;
+	        playerTiles = 10800;
         if (cNumberNonGaiaPlayers >6)
-	        playerTiles = 17600;			
+	        playerTiles = 8800;			
    int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
    rmSetMapSize(size, size);
@@ -29,38 +29,7 @@ void main(void)
 
 	//rmSetWindMagnitude(3);
 	rmSetWindMagnitude(2);
-  
-rmSetLightingSet("yucatan");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","yucatan");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-    
    // Picks a default water height
    rmSetSeaLevel(4);
 
@@ -968,7 +937,7 @@ rmSetTriggerLoop(false);
 
 //  ***************************  Define and place Forests  *******************************
    int forestTreeID = 0;
-   numTries=12*cNumberNonGaiaPlayers;
+   numTries=6*cNumberNonGaiaPlayers;
    failCount=0;
    for (i=0; <numTries)
    {
@@ -1008,7 +977,7 @@ rmSetTriggerLoop(false);
 	  }
 	   else
 	   {
-       numTries=20*cNumberNonGaiaPlayers;
+       numTries=10*cNumberNonGaiaPlayers;
 	   int forest2=rmCreateArea("forest2"+i);
 	   rmSetAreaWarnFailure(forest2, false);
 	   rmSetAreaSize(forest2, rmAreaTilesToFraction(100), rmAreaTilesToFraction(375));
@@ -1051,6 +1020,17 @@ rmSetTriggerLoop(false);
   if (cNumberTeams > 2 || (teamZeroCount - teamOneCount) > 1 || (teamOneCount - teamZeroCount) > 1)
     weird = true;
   
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <11 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     

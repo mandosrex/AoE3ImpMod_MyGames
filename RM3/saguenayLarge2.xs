@@ -58,43 +58,12 @@ void main(void)
 	}
 
    // Picks the map size
-   int playerTiles=44000;
+   int playerTiles=22000;
    int size=2.0*sqrt(cNumberNonGaiaPlayers*playerTiles);
    rmEchoInfo("Map size="+size+"m x "+size+"m");
    rmSetMapSize(size, size);
    rmSetLightingSet("saguenay");
- 
-rmSetLightingSet("saguenay");
 
-rmCreateTrigger("night");
-rmCreateTrigger("day");
-
-rmSwitchToTrigger(rmTriggerID("night"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","st_petersburg_night");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("day"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(true);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-
-rmSwitchToTrigger(rmTriggerID("day"));
-rmAddTriggerCondition("Timer");
-rmSetTriggerConditionParamFloat("Param1",500);
-rmAddTriggerEffect("Set Lighting");
-rmSetTriggerEffectParam("SetName","saguenay");
-rmSetTriggerEffectParamFloat("FadeTime",340);
-rmAddTriggerEffect("Fire Event");
-rmSetTriggerEffectParamInt("EventID",rmTriggerID("night"));
-rmSetTriggerPriority(4);
-rmSetTriggerActive(false);
-rmSetTriggerRunImmediately(false);
-rmSetTriggerLoop(false);
-   
    // Picks a default water height
    rmSetSeaLevel(1.0);
 
@@ -153,6 +122,8 @@ rmSetTriggerLoop(false);
    int fishLand = rmCreateTerrainDistanceConstraint("fish land", "land", true, 6.0);
    int whaleLand = rmCreateTerrainDistanceConstraint("whale v. land", "land", true, 15.0);
    int avoidSheep=rmCreateTypeDistanceConstraint("sheep avoids sheep", "sheep", 40.0);
+    int avoidNuggetWater=rmCreateTypeDistanceConstraint("nugget vs. nugget water", "AbstractNugget", 80.0);
+   int avoidLand = rmCreateTerrainDistanceConstraint("ship avoid land", "land", true, 15.0);
 
    // Avoid impassable land
    int avoidImpassableLand=rmCreateTerrainDistanceConstraint("avoid impassable land", "Land", false, 10.0);
@@ -680,7 +651,7 @@ rmSetTriggerLoop(false);
 	}
 	else
 	{
-		rmAddObjectDefItem(startResourceBuildingID, "LivestockPen", 1, 0.0);
+		rmAddObjectDefItem(startResourceBuildingID, "Mill", 1, 0.0);
 	}
 	rmSetObjectDefMinDistance(startResourceBuildingID, 16.0);
 	rmSetObjectDefMaxDistance(startResourceBuildingID, 20.0);
@@ -947,7 +918,7 @@ rmSetTriggerLoop(false);
 
 	// Define and place Forests
    int forestTreeID = 0;
-   int numTries=12*cNumberNonGaiaPlayers;
+   int numTries=6*cNumberNonGaiaPlayers;
    int failCount=0;
    for (i=0; <numTries)
       {   
@@ -1078,6 +1049,17 @@ rmSetTriggerLoop(false);
 	   	rmPlaceObjectDefAtLoc(colonyShipID, i, 1.0, 1.0, 1);
 	}   
 
+    // Place random flags
+    int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
+    for ( i =1; <16 ) {
+    int flagID = rmCreateObjectDef("random flag"+i);
+    rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
+    rmSetObjectDefMinDistance(flagID, 0.0);
+    rmSetObjectDefMaxDistance(flagID, rmXFractionToMeters(0.40));
+    rmAddObjectDefConstraint(flagID, avoidFlags);
+    rmPlaceObjectDefAtLoc(flagID, 0, 0.5, 0.5);
+    }
+
   // check for KOTH game mode
   if(rmGetIsKOTH()) {
     
@@ -1099,4 +1081,19 @@ rmSetTriggerLoop(false);
 
    // Text
    rmSetStatusText("",1.0);      
+
+  // Water nuggets
+  
+  int nuggetW= rmCreateObjectDef("nugget water"); 
+  rmAddObjectDefItem(nuggetW, "ypNuggetBoat", 1, 0.0);
+  rmSetNuggetDifficulty(5, 5);
+  rmSetObjectDefMinDistance(nuggetW, rmXFractionToMeters(0.0));
+  rmSetObjectDefMaxDistance(nuggetW, rmXFractionToMeters(0.5));
+  rmAddObjectDefConstraint(nuggetW, avoidLand);
+  rmAddObjectDefConstraint(nuggetW, avoidNuggetWater);
+  rmPlaceObjectDefAtLoc(nuggetW, 0, 0.5, 0.5, cNumberNonGaiaPlayers*4);
+    
+	// Text
+	rmSetStatusText("",0.99);
+
 }

@@ -56,9 +56,9 @@ void main(void)
 	float handedness = rmRandFloat(0, 1);
 
    // Picks the map size
-	int playerTiles=12500;
+	int playerTiles=21000;
    if (cNumberNonGaiaPlayers >4)
-		playerTiles = 11500;
+		playerTiles = 20000;
 
    // Picks default terrain and water
    rmSetSeaType("new england coast");
@@ -1055,7 +1055,7 @@ void main(void)
    
     // Place random flags
     int avoidFlags = rmCreateTypeDistanceConstraint("flags avoid flags", "ControlFlag", 70);
-    for ( i =1; <11 ) {
+    for ( i =1; <14 ) {
     int flagID = rmCreateObjectDef("random flag"+i);
     rmAddObjectDefItem(flagID, "ControlFlag", 1, 0.0);
     rmSetObjectDefMinDistance(flagID, 0.0);

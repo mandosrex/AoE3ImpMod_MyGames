@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo
+imagepath = "ui\random_map\unknown"
+displayName = "Missouri Valley" 
+detailsText = "Prairie map with central river and defensible crossings."  
+loadDetailsText = "Missouri Valley is a larger map with a central river and one or more crossings. There is a single trade route on each side of the map between the river and a set of bluffs. There are a few natives, either Cheyenne, Comanche or Cree.\n \nMap by RF_Gandalf" 
+
+loadBackground="ui\random_map\unknown\unknown_map">
+
+   <loadss>ui\random_map\great_plains\great_plains_ss_03</loadss>
+</mapinfo>
+
+ 

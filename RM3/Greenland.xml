@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo detailstext = "Cliffs create choke points throughout the map." imagepath = "ui\random_map\unknown" displayName = "Greenland" cannotReplace = ""
+		loadDetailstext="A trade route runs across the center, and cliffs serve as choke points throughout the map. There are always Nootka villages on both sides of the trade route.\n \nMap by Rookman64" loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\yukon\yukon_ss_01</loadss>
+   <loadss>ui\random_map\yukon\yukon_ss_02</loadss>
+   <loadss>ui\random_map\yukon\yukon_ss_03</loadss>
+</mapinfo>

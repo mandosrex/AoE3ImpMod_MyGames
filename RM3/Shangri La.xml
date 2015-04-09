@@ -1,8 +1,8 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <mapinfo 
-detailsText = "The mystical Shangra La, cross the mountains for more resources." 
+detailsText = "The mystical Shangri La, cross the mountains for more resources.\nMap by RF_Gandalf" 
 imagepath = "ui\random_map\unknown" 
-displayName = "Shangra La" 
+displayName = "Shangri La" 
 loadDetailsText="All players start on the snowy Tibetan Plateau to the east side of a high mountain range, each with a single silver mine and limited local resources. Find the few passes through the mountains to the fabled lost valley of Shangra La, where a trade route, gold, treasures and plentiful other extra resources await.\n \nMap by RF_Gandalf" 
 loadBackground="ui\random_map\unknown\unknown_map">
   <loadss>ui\random_map\himalayas\himalayas_ss_2</loadss>

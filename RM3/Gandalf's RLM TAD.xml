@@ -2,7 +2,7 @@
 <mapinfo 
 imagepath = "ui\random_map\unknown" 
 displayName = "Random Land Map" 
-detailsText = "A land focused map with endless random variety." 
+detailsText = "A land focused map with endless random variety.\nMap by RF_Gandalf" 
 loadDetailsText = "The Random Land Map randomizes terrain patterns and matching resources and tribes on a near-standard-sized map. Each map has several random Native villages of one or two types and varying positions, several random variations on trade routes and endless random variety of other features.\n \nMap by RF_Gandalf" 
 loadBackground="ui\random_map\unknown\unknown_map">
    <loadss>ui\random_map\unknown\unknown_ss_01</loadss>

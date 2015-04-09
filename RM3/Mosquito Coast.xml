@@ -1,10 +1,10 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<mapinfo detailsText = "Mosquito Coast is a corner of the Caribbean lowlands - a maze of water pockets, lagoons and tidal wetlands." imagepath = "ui\random_map\unknown" displayName = "Mosquito Coast" cannotReplace = ""
+<mapinfo detailsText = "Mosquito Coast is a corner of the Caribbean lowlands - a maze of water pockets, lagoons and tidal wetlands.\nMap by Neuron" imagepath = "ui\random_map\unknown" displayName = "Mosquito Coast" cannotReplace = ""
 		loadDetailsText="Players start in a tropical wetlands region, a maze of water pockets, cliffs and tidal wetlands. The lush and dense cloud forests are home to a unique mix of animals and plants, as well as rich sources of silver.\n
 \nThe terrain of the region can range from inland plains to lowlands, covered by dense tropical forests. Native settlements can be found throughout the region, close to the edges of the map or next to a trading route.\n \nMap by Neuron" loadBackground="ui\random_map\unknown\unknown_map">
    <loadss>ui\random_map\yucatan\yucatan_ss_01</loadss>
    <loadss>ui\random_map\yucatan\yucatan_ss_02</loadss>
    <loadss>ui\random_map\yucatan\yucatan_ss_03</loadss>
    <loadss>ui\random_map\amazon\amazon_ss_01</loadss>
-   <loadss>ui\history\geography\G_M_Yucatan</loadss>
+   <loadss>ui\random_map\amazon\amazon_ss_02</loadss>
 </mapinfo>

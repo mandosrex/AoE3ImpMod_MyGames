@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo
+imagepath = "ui\random_map\unknown" 
+displayName = "Northern Lakes" 
+detailsText = "Northern lake area, full of fish.\nMap by RF_Gandalf"  
+loadDetailsText = "Two lakes partially separate the teams in this northern setting. The lakes are full of fish, and the resources are rich on land. There can be one or two trade routes across the center of the map. The Cree and Huron natives are distributed symmetrically. There are three different terrain sets possible for this map. Note the lakes have no Home City gather points.\n \nMap by RF_Gandalf"
+
+loadBackground="ui\random_map\unknown\unknown_map">
+
+   <loadss>ui\random_map\saguenay\saguenay_ss_01</loadss>
+   <loadss>ui\random_map\saguenay\saguenay_ss_02</loadss>
+   <loadss>ui\random_map\saguenay\saguenay_ss_03</loadss>
+</mapinfo>

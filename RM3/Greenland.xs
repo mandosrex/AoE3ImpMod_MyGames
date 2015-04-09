@@ -3,6 +3,7 @@
 // Adaptation of original AOE3 map 
 // By Rookman64
 
+include "mercenaries.xs";
 include "ypAsianInclude.xs";
 include "ypKOTHInclude.xs";
 

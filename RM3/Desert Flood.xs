@@ -111,11 +111,11 @@ void main(void)
       rmSetLightingSet("texas");
    else
       rmSetLightingSet("307a_beach");
-   baseType = "texas_dirt";
+   baseType = "bayou\groundforest_bay";
    riverType = "bayou";
-   forestType = "caribbean palm forest";
-   treeType = "TreeCaribbean";
-   cliffType = "Texas";
+   forestType = "bayou swamp forest";
+   treeType = "TreeBayou";
+   cliffType = "California";
    if (variantChance == 1)
    {
          deerType = "ypNilgai";
@@ -140,7 +140,7 @@ void main(void)
    else if (placeGold == 3)
 	mineType = "mineCopper"; 
 
-   rmTerrainInitialize("texas\ground3_tex", 2);
+   rmTerrainInitialize("bayou\ground7_bay", 2);
    rmEnableLocalWater(true);
    rmSetMapType("land");
 
@@ -331,7 +331,7 @@ void main(void)
    rmSetAreaSize(desertPatch1ID, 0.5, 0.5);
    rmSetAreaLocation(desertPatch1ID, 0.65, 0.5);
    rmAddAreaInfluenceSegment(desertPatch1ID, 0.65, 0.0, 0.65, 1.0);
-   rmSetAreaMix(desertPatch1ID, "texas_dirt");
+   rmSetAreaMix(desertPatch1ID, "bayou_forest");
    rmSetAreaSmoothDistance(desertPatch1ID, 25);
    rmSetAreaCoherence(desertPatch1ID, 0.9);
    rmBuildArea(desertPatch1ID);
@@ -341,7 +341,7 @@ void main(void)
    rmSetAreaSize(desertPatch2ID, 0.2, 0.21);
    rmSetAreaLocation(desertPatch2ID, 0.85, 0.5);
    rmAddAreaInfluenceSegment(desertPatch2ID, 0.85, 0.0, 0.85, 1.0);
-   rmSetAreaTerrainType(desertPatch2ID, "texas\ground5_tex");
+   rmSetAreaTerrainType(desertPatch2ID, "bayou\ground5_bay");
    rmSetAreaSmoothDistance(desertPatch2ID, 25);
    rmSetAreaCoherence(desertPatch2ID, 0.5);
    rmBuildArea(desertPatch2ID);
@@ -351,7 +351,7 @@ void main(void)
    rmSetAreaSize(desertPatch3ID, 0.12, 0.12);
    rmSetAreaLocation(desertPatch3ID, 0.92, 0.5);
    rmAddAreaInfluenceSegment(desertPatch3ID, 0.92, 0.0, 0.92, 1.0);
-   rmSetAreaTerrainType(desertPatch3ID, "texas\ground5_tex");
+   rmSetAreaTerrainType(desertPatch3ID, "bayou\ground5_bay");
    rmSetAreaSmoothDistance(desertPatch3ID, 25);
    rmSetAreaCoherence(desertPatch3ID, 0.99);
    rmBuildArea(desertPatch3ID);

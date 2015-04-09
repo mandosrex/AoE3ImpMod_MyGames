@@ -22,6 +22,8 @@
 */
 
 include "mercenaries.xs";
+include "ypAsianInclude.xs";
+include "ypKOTHInclude.xs";
 
 bool Asian = false;
 
@@ -151,7 +153,7 @@ int buildTradeArea (string TradeIslandName = "", float xLoc = 0.0, float zLoc = 
     int tradeIslandID=rmCreateArea(TradeIslandName); 
     rmSetAreaSize(tradeIslandID, 0.09, 0.09);
     rmAddAreaToClass(tradeIslandID, classSmallIsland);  
-    rmSetAreaTerrainType(tradeIslandID, "carolinas\cliff_top1_car");
+    rmSetAreaTerrainType(tradeIslandID, "amazon\ground2_ama");
     //rmAddAreaTerrainLayer(tradeIslandID, "amazon\river1_am", 0, 14);
     //rmSetAreaMix(tradeIslandID, "yucatan_grass");  
     rmSetAreaEdgeFilling(tradeIslandID, 0);
@@ -350,7 +352,7 @@ if (rmGetIsFFA()==false) {
     
 	int plateauCenter=rmCreateArea("center plateau");
 	rmSetAreaSize(plateauCenter, 0.17, 0.17); 
-	rmSetAreaTerrainType(plateauCenter, "carolinas\cliff_top1_car");	
+	rmSetAreaTerrainType(plateauCenter, "amazon\ground2_ama");	
 //	rmSetAreaMix(plateauCenter, "yucatan_grass");
 	rmSetAreaLocation(plateauCenter, 0.5, 0.5);
 	rmSetAreaCoherence(plateauCenter, 0.5);
@@ -370,7 +372,7 @@ if (rmGetIsFFA()==false) {
 
 	int plateauCenter2=rmCreateArea("center plateau 2");
 	rmSetAreaSize(plateauCenter2, 0.17, 0.17); 
-	rmSetAreaTerrainType(plateauCenter2, "carolinas\cliff_top1_car");	
+	rmSetAreaTerrainType(plateauCenter2, "amazon\ground2_ama");	
 //	rmSetAreaMix(plateauCenter2, "yucatan_grass");
 	rmSetAreaLocation(plateauCenter2, 0.5, 0.5);
 	rmSetAreaCoherence(plateauCenter2, 0.5);
@@ -435,7 +437,7 @@ if (rmGetIsFFA()==false) {
 	else {
 		rmSetAreaSize(plateauNorthID, 0.2, 0.2); 
 	}
-	rmSetAreaTerrainType(plateauNorthID, "carolinas\cliff_top1_car");
+	rmSetAreaTerrainType(plateauNorthID, "amazon\ground2_ama");
 	rmSetAreaLocation(plateauNorthID, 0.5, 0.9);
 	rmSetAreaCoherence(plateauNorthID, 0.80);
 	rmAddAreaToClass(plateauNorthID, classIsland);
@@ -464,7 +466,7 @@ if (rmGetIsFFA()==false) {
 		else {
 			rmSetAreaSize(plateauSouthID, 0.2, 0.2); 
 		}
-	rmSetAreaTerrainType(plateauSouthID, "carolinas\cliff_top1_car");
+	rmSetAreaTerrainType(plateauSouthID, "amazon\ground2_ama");
 //	rmSetAreaMix(plateauSouthID, "yucatan_grass");
 	rmSetAreaLocation(plateauSouthID, 0.5, 0.1);
 	rmSetAreaCoherence(plateauSouthID, 0.80);
@@ -678,7 +680,7 @@ int TCvsWater = rmCreateTerrainDistanceConstraint("TC vs water", "Land", false, 
 
     int top2=rmCreateArea("top layer 2");
 	rmSetAreaSize(top2, 0.80, 0.80); 
-	rmSetAreaTerrainType(top2, "carolinas\cliff_top1_car");
+	rmSetAreaTerrainType(top2, "amazon\ground2_ama");
 	rmSetAreaElevationNoiseBias(top2, 1);
 	rmSetAreaElevationEdgeFalloffDist(top2, 3);
 	rmSetAreaElevationVariation(top2, 2);
@@ -706,7 +708,7 @@ if (diceThrow<0.9){
 		rmSetAreaLocation(tupiIsland, 0.6, 0.2);
 	else 
 		rmSetAreaLocation(tupiIsland, 0.6, 0.15);
-	rmSetAreaTerrainType(tupiIsland, "carolinas\cliff_top1_car"); 
+	rmSetAreaTerrainType(tupiIsland, "amazon\ground2_ama"); 
 	rmSetAreaCoherence(tupiIsland, 1.0); 
 	rmBuildArea(tupiIsland);
 
@@ -721,7 +723,7 @@ if (diceThrow<0.9){
 	else
 		rmSetAreaLocation(seminoleIsland, 0.4, 0.85);
 
-	rmSetAreaTerrainType(seminoleIsland, "carolinas\cliff_top1_car"); 
+	rmSetAreaTerrainType(seminoleIsland, "amazon\ground2_ama"); 
 	rmSetAreaCoherence(seminoleIsland, 1.0); 
 	rmBuildArea(seminoleIsland);
             
@@ -816,7 +818,7 @@ rmSetStatusText("", 0.3);
 		int id=rmCreateArea("Player"+i); 
 		rmSetPlayerArea(i, id); 
 		rmSetAreaSize(id, rmAreaTilesToFraction(900), rmAreaTilesToFraction(900)); 
-        rmSetAreaTerrainType(id, "carolinas\cliff_top1_car");
+        rmSetAreaTerrainType(id, "amazon\ground2_ama");
         rmAddAreaToClass(id, classPlayer); 
 
 			if (rmGetIsFFA()==false){ 
@@ -908,11 +910,11 @@ if (rmGetIsFFA()==false) {
 				if(Int2==2) Float4=-0.015;
 				if(Int3==1) Float5=0.015;
 				if(Int3==2) Float5=-0.015;
-				Area(Float3, Float1/10, Float2/10, "carolinas\cliff_top1_car");						
+				Area(Float3, Float1/10, Float2/10, "amazon\ground2_ama");						
 				rmAddAreaToClass(landnoise, classBase);
 				rmAddAreaRemoveType(landnoise, "PropEaglesRocks");
 				rmBuildArea(landnoise);
-				Area(Float3, (Float1/10)+Float4, (Float2/10)+Float5, "carolinas\cliff_top1_car");	// The compiler doesn't like this (float -> int index variable -> float)
+				Area(Float3, (Float1/10)+Float4, (Float2/10)+Float5, "amazon\ground2_ama");	// The compiler doesn't like this (float -> int index variable -> float)
 				rmAddAreaRemoveType(landnoise, "PropEaglesRocks");
 				rmBuildArea(landnoise);
 			}
@@ -927,9 +929,9 @@ if (rmGetIsFFA()==false) {
 		rmSetAreaCliffType(cliffs, "Amazon"); // Cave
 		rmSetAreaCliffHeight(cliffs, 10.0, 0.0, 0.5); 
 		rmSetAreaCliffEdge(cliffs, 1, 2.0, 0.0, 0.0, 0); 
-		rmSetAreaTerrainType(cliffs, "carolinas\cliff_top1_car"); 
+		rmSetAreaTerrainType(cliffs, "amazon\ground2_ama"); 
 		rmSetAreaCliffPainting(cliffs, true, true, true, 0, true); 
-	//	rmAddAreaTerrainReplacement(cliffs, "cave\cave_top", "carolinas\cliff_top1_car");
+	//	rmAddAreaTerrainReplacement(cliffs, "cave\cave_top", "amazon\ground2_ama");
 		rmSetAreaMinBlobs(cliffs, 1); 
 		rmSetAreaMaxBlobs(cliffs, 1); 
 		rmSetAreaCoherence(cliffs, 0.5); 
@@ -944,7 +946,7 @@ if (rmGetIsFFA()==false) {
 
 		int top=rmCreateArea("top layer");
 		rmSetAreaSize(top, 0.80, 0.80); 
-		rmSetAreaTerrainType(top, "carolinas\cliff_top1_car");
+		rmSetAreaTerrainType(top, "amazon\ground2_ama");
 		rmSetAreaElevationNoiseBias(top, 1);
 		rmSetAreaElevationEdgeFalloffDist(top, 3);
 		rmSetAreaElevationVariation(top, 2);
@@ -1077,7 +1079,7 @@ if (rmGetIsFFA()==true){
 		int deltaIsletID = rmCreateArea("bonus islands"+i);
 		rmAddAreaToClass(deltaIsletID, rmClassID("deltaIsland"));
 	//	rmSetAreaMix(deltaIsletID, "yucatan_grass");
-		rmSetAreaTerrainType(deltaIsletID, "carolinas\cliff_top1_car");
+		rmSetAreaTerrainType(deltaIsletID, "amazon\ground2_ama");
 		rmSetAreaSize(deltaIsletID, 0.025, 0.035);
 		rmSetAreaCoherence(deltaIsletID, 0.75);
 		rmSetAreaBaseHeight(deltaIsletID, -1.5);
@@ -1617,6 +1619,18 @@ rmSetStatusText("", 0.9);
 		rmPlaceGroupingAtLoc(stoneWallID, 0, 0.5, 0.5);
 	}
 
+	// KOTH game mode
+   if(rmGetIsKOTH())
+   {
+      float xLoc = 0.5;
+      float yLoc = 0.5;
+      float walk = 0.03;
+      
+      ypKingsHillPlacer(yLoc, yLoc, walk, 0);
+      rmEchoInfo("XLOC = "+yLoc);
+      rmEchoInfo("XLOC = "+yLoc);
+   }
+	
 	// Water buffalos
 
 	if (IsYP()){

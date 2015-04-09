@@ -3,6 +3,8 @@
 // by RF_Gandalf
 
 include "mercenaries.xs";
+include "ypAsianInclude.xs";
+include "ypKOTHInclude.xs";
 
 void main(void)
 {  
@@ -156,20 +158,20 @@ void main(void)
 
    if (patternChance == 1)
    {
-      baseType = "great plains grass"; 
-	forestFloor = "great_plains\ground1_gp";
-      riverType = "Andes River";
+      baseType = "deccan_grassy_Dirt_a";
+	forestFloor = "Deccan\ground_grass2_deccan";
+      riverType = "Deccan Plateau River";
    }
    else if (patternChance == 2)
    {
-      baseType = "great plains drygrass";
-	forestFloor = "great_plains\ground8_gp";
-      riverType = "Pampas River";
+      baseType = "deccan_grassy_Dirt_a";
+	forestFloor = "Deccan\ground_grass2_deccan";
+      riverType = "Deccan Plateau River";
    }
 
-   forestType = "great plains forest";
-   cliffType = "Great Plains";
-   treeType = "TreeGreatPlains";
+   forestType = "pampas forest";
+   cliffType = "Deccan Plateau";
+   treeType = "TreePampas";
 
    if (variantChance == 1)
    {
@@ -1219,6 +1221,18 @@ void main(void)
       rmSetObjectDefMaxDistance(riverbankTreeID, longSide*0.25);
       rmPlaceObjectDefAtLoc(riverbankTreeID, 0, 0.5, 0.24);
       rmPlaceObjectDefAtLoc(riverbankTreeID, 0, 0.5, 0.76);
+   }
+
+// KOTH game mode
+   if(rmGetIsKOTH())
+   {
+      float xLoc = 0.5;
+      float yLoc = 0.5;
+      float walk = 0.03;
+      
+      ypKingsHillPlacer(yLoc, yLoc, walk, 0);
+      rmEchoInfo("XLOC = "+yLoc);
+      rmEchoInfo("XLOC = "+yLoc);
    }
 
 // Random trees

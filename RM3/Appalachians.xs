@@ -3496,6 +3496,18 @@ else if (barrierPattern == 3) // 2 single parallel barrier ranges
 	} 
    }
 
+// KOTH game mode
+   if(rmGetIsKOTH())
+   {
+      float xLoc = 0.5;
+      float yLoc = 0.5;
+      float walk = 0.03;
+      
+      ypKingsHillPlacer(yLoc, yLoc, walk, 0);
+      rmEchoInfo("XLOC = "+yLoc);
+      rmEchoInfo("XLOC = "+yLoc);
+   }
+
 // Random trees
    int StragglerTreeID=rmCreateObjectDef("stragglers");
    rmAddObjectDefItem(StragglerTreeID, treeType, 1, 0.0);

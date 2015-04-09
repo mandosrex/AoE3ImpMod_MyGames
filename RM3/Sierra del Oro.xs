@@ -135,7 +135,7 @@ void main(void)
       rmSetMapType("sonora");
 	rmSetMapType("grass");
       if (lightingChance == 1)
-         rmSetLightingSet("seville");
+         rmSetLightingSet("caribbean");
       else
          rmSetLightingSet("pampas");
       baseType = "texas_dirt";
@@ -167,10 +167,10 @@ void main(void)
       rmSetMapType("sonora");
 	rmSetMapType("desert");
       if (lightingChance == 1)
-         rmSetLightingSet("seville");
+         rmSetLightingSet("caribbean");
       else
           rmSetLightingSet("pampas");
-      baseType = "painteddesert_groundmix_2";
+      baseType = "painteddesert_groundmix_3";
 	forestType = "painteddesert forest";
       cliffType = "Painteddesert";
 	treeType = "TreePaintedDesert";
@@ -188,21 +188,21 @@ void main(void)
          centerHerdType = "bison";         
 	}
 	eaglerock = 1;
-	rmTerrainInitialize("painteddesert\pd_ground_diffuse_d", 2.0);
+	rmTerrainInitialize("painteddesert\pd_ground_diffuse_h", 2.0);
    }
    else if (patternChance == 5) // cal desert
    {   
-      rmSetMapType("sonora");
+      rmSetMapType("andes");
 	rmSetMapType("grass");
       if (lightingChance == 1)
-         rmSetLightingSet("seville");
+         rmSetLightingSet("caribbean");
       else
          rmSetLightingSet("andes");      
-      baseType = "california_desert0";
-	forestType = "California Desert Forest";
-      cliffType = "Sonora";
+      baseType = "andes_grass_a";
+	forestType = "andes forest";
+      cliffType = "andes";
 	treeType = "TreeMadrone";
-	tree2Type = "TreeSonora";
+	tree2Type = "treePuya";
       if (variantChance == 1)
 	{
          deerType = "elk";
@@ -216,7 +216,7 @@ void main(void)
          centerHerdType = "pronghorn";         
 	}
 	coverUp = 1;
-	rmTerrainInitialize("california\desert5_cal", 2.0);
+	rmTerrainInitialize("andes\ground10_and", 2.0);
    }
    else if (patternChance == 6) // great plains
    { 

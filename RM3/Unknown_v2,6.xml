@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Unknown Fixed" 
+detailsText = "Highly improved Unknown map.\nMap by Rikikipu" 
+loadDetailsText = "More playable than the original one, maximum three different native Trading Posts avalaible, always a second hunt near to your Town Center and a third gold mine not too far, water is not as broken as the original one, starting treasures added.\n \nMap by Rikikipu" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

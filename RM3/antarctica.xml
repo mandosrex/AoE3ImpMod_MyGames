@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Antarctica" 
+detailsText = "A modified Siberia without the frozen river.\nMap by titumir" 
+loadDetailsText = "Antarctica is a standard snowy map for both Singleplayer and Multiplayer Games. Rushers are very tempted, but defensive options are available too. Resources are enough and plenty. A trading route is present to the south of the map and natives in the north.\n \nMap by titumir" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

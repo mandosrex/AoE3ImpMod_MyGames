@@ -38,7 +38,7 @@ void main(void)
   startTreeType = "TreeYukonSnow";
   mapType1 = "siberia";
   mapType2 = "grass";
-  huntable1 = "bison";
+  huntable1 = "MuskOx";
   huntable2 = "ypWaterBuffalo";   
   lightingType = "great lakes winter";
   tradeRouteType = "land";
@@ -401,7 +401,7 @@ rmEchoInfo("Map size="+size+"m x "+size+"m");
   rmAddObjectDefConstraint(startingOutpostAsianID, avoidAll);
 
   int playerSaloonID=rmCreateObjectDef("player saloon");
-  rmAddObjectDefItem(playerSaloonID, "Saloon", 1, 7.0);
+  rmAddObjectDefItem(playerSaloonID, "ypWaterBuffalo", 1, 7.0);
   rmSetObjectDefMinDistance(playerSaloonID, 12.0);
   rmSetObjectDefMaxDistance(playerSaloonID, 20.0);
 	rmAddObjectDefConstraint(playerSaloonID, avoidAll);

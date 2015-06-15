@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Chattahoochee" 
+detailsText = "A land map with a maze of hills.\nMap by umbranav" 
+loadDetailsText = "This map features a lot of resources and a trade route scattered between the maze of hills. The name Chattahoochee is thought to come from a Creek Indian word for painted rock - possibly referring to the many colorful granite outcroppings.\n \nMap by umbranav" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

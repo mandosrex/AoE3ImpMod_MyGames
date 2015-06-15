@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "El Dorado" 
+detailsText = "The mythic city of El Dorado, with all its riches and dangers.\nMap by Arcanjo Zero" 
+loadDetailsText = "The mythic city of El Dorado was finally found, with all its riches and dangers. Many gold mines and crates are in the central plateau, along with huntables and bushes. You'll need these riches to keep your colony running, but they're guarded by some hostile natives that will not give up easily. Two native settlements (can be Incas, Zapotec or Mayas) will always be there to help you in your quest.\n \nMap by Arcanjo Zero" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

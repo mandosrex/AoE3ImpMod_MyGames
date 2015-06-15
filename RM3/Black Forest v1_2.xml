@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName="Black Forest"
+detailsText = "A remake of the old AoE2 map.\nMap by Sir_Hans and Dewinner" 
+loadDetailsText="A very forest heavy map with a thick forest diving the map in two and a clearing in the middle. This map contains 6 starting sheeps, many hunts, silver and goldmines.\n \nMap by Sir_Hans and Dewinner" 
+ 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>

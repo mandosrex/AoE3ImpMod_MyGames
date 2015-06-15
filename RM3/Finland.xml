@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Finland" 
+detailsText = "Fight for your life in this Finnish-style map!.\nMap by AOE_Fan" 
+loadDetailsText = "There are many small lakes in this Finland map. The lakes are frozen in winter. There is also sea which can be frozen or unfrozen in winter. No natives or trade routes. Good luck!\n \nMap by AOE_Fan" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

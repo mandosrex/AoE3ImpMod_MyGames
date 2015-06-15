@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Huge Lakes" 
+detailsText = "Large map with many lakes and forests.\nMap by Augustus Black" 
+loadDetailsText = "Huge Lakes is a large map with many lakes scattered around, a Trade Route in the middle and 4 Cherokee Villages. Plenty of animals roam the large forests.\nMind that mines are rare!\n \nMap by Augustus Black" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

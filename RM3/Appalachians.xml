@@ -5,9 +5,9 @@ displayName = "Appalachians"
 detailsText="The ridge and valley region of the Appalachian Mountains.\nMap by RF_Gandalf" 
 loadDetailsText="This map represents the long ridges of the Appalachians, and has defensive possibilities. Teams start on either side of a ridge or ridges with varying gaps through or over the barriers. There may be randomly 1 or 2 trade routes and a variety of possible numbers and placement of either Cherokee, Iroquois, Seminole or Nootka-up to 2 different tribes per map. There are 4 different versions.\n \nMap by RF_Gandalf" 
 loadBackground="ui\random_map\unknown\unknown_map">
-   <loadss>ui\random_map\new_england\new_england_ss_01</loadss>
-   <loadss>ui\random_map\new_england\new_england_ss_02</loadss>
-   <loadss>ui\random_map\yukon\yukon_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
 </mapinfo>
 
  

@@ -6,9 +6,9 @@ detailsText = "Flooded area provides most of the food.\nMap by RF_Gandalf"
 loadDetailsText = "The river in this arid region has flooded, covering cropland which can still be harvested. Players start in a line midway between the river and desert, where the only extra mines on the map are located. This map has less than usual huntable or domesticated animals. Natives may be found in the desert, along with the single trade route.\n \nMap by RF_Gandalf" 
 
 loadBackground="ui\random_map\unknown\unknown_map">
-   <loadss>ui\random_map\everglades\everglades_ss_01</loadss>
-   <loadss>ui\random_map\amazon\amazon_ss_01</loadss>
-   <loadss>ui\random_map\everglades\everglades_ss_03</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
 </mapinfo>
 
  

@@ -5,6 +5,7 @@ imagepath = "ui\random_map\unknown"
 displayName = "Shangri La" 
 loadDetailsText="All players start on the snowy Tibetan Plateau to the east side of a high mountain range, each with a single silver mine and limited local resources. Find the few passes through the mountains to the fabled lost valley of Shangri La, where a trade route, gold, treasures and plentiful other extra resources await.\n \nMap by RF_Gandalf" 
 loadBackground="ui\random_map\unknown\unknown_map">
-  <loadss>ui\random_map\himalayas\himalayas_ss_2</loadss>
-  <loadss>ui\random_map\himalayas\himalayas_ss_3</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
 </mapinfo>

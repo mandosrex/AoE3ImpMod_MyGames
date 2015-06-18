@@ -5,9 +5,9 @@ displayName = "Korea"
 detailsText = "The Korean peninsula.\nMap by RF_Gandalf" 
 loadDetailsText = "Players start on either side of the long peninsula. The single trade route and increased mines are to the north, with rich fishing in the surrounding seas. Natives can be Zen, Shaolin or Jesuit.\n \nMap by RF_Gandalf" 
 loadBackground="ui\random_map\unknown\unknown_map">
-  <loadss>ui\random_map\japan\honshu_ss_1</loadss>
-  <loadss>ui\random_map\japan\honshu_ss_2</loadss>
-  <loadss>ui\random_map\japan\honshu_ss_3</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
 </mapinfo>
 
  

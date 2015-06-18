@@ -6,6 +6,7 @@ detailsText = "A large random island map.\nMap by RF_Gandalf"
 loadDetailsText="Players start on separate islands on a very large map using 'unknown' map types only from TAD. Control the seas for access to the resources on the variable scattered extra islands as well as rich fishing and whaling. A single trade route is found on a separate large island. One native village of a same tribe is found on each player island, with a few of the same or a different tribe placed on other islands.\n \nMap by RF_Gandalf" 
  
 loadBackground="ui\random_map\unknown\unknown_map">
-   <loadss>ui\random_map\silk_road\ss_silk_road</loadss>
-   <loadss>ui\random_map\borneo\borneo_ss_1</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
 </mapinfo>

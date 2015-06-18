@@ -5,8 +5,7 @@ displayName = "Sierra del Oro"
 detailsText = "Desert mountain area of the American West.\nMap by RF_Gandalf" 
 loadDetailsText = "In this arid region you will find 4 or 5 native villages, always of one or two types per map. These can be Mayan, Zapotec, Comanche, Apache, Navajo or Cheyenne. A mountainous area on one side of the map has many gold mines. There can either be one or two trade routes to supplement your economy.\n \nMap by RF_Gandalf" 
 loadBackground="ui\random_map\unknown\unknown_map">
-   <loadss>ui\random_map\sonora\sonora_ss_01</loadss>
-   <loadss>ui\random_map\painteddesert\painteddesert_ss_02</loadss>
-   <loadss>ui\random_map\texas\texas_ss_01</loadss>
-   <loadss>ui\random_map\andes\andes_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
 </mapinfo>

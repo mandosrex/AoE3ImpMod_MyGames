@@ -1,6 +1,8 @@
 
 // *** RMS Generator File ***  09.04.2012 *** 16:15:19
 
+include "mercenaries.xs";
+include "ypAsianInclude.xs";
 
 void main(void)
 {

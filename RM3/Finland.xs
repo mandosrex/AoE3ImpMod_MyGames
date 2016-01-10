@@ -3,6 +3,7 @@
 // Ask permission to use this map in your own mods/maps! (PM to AOE_Fan in http://knightsandbarbarians.heavenforum.org/forum)
 
 include "mercenaries.xs";
+include "ypAsianInclude.xs";
 
 void main(void)
 {

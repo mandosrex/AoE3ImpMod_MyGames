@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Huge Amazon" 
+detailsText = "A huge version of the Amazon map.\nMap by dietermoreno" 
+loadDetailsText = "The Amazon jungle is one of the largest wilderness jungle areas on Earth, and as such, expect dense undergrowth slowing the advance of your troops to a crawl making transport for artillery difficult to penetrate the jungle.\n \nMap by dietermoreno" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>

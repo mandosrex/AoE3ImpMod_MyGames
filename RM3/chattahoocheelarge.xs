@@ -4,6 +4,7 @@
 
 
 include "mercenaries.xs";
+include "ypAsianInclude.xs";
 
 // Main entry point for random map script
 void main(void)

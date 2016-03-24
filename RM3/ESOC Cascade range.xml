@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Cascade Range" 
+detailsText = "Great valley with thick forests and many berry bushes.\nMap by Garja" 
+loadDetailsText = "Town centers are placed on the opposite sides of this valley, nestled within the Cascade Range. The thick forest gives way to large glades characterized by the presence of many berry bushes. There are not many animals to hunt but lakes on the sides are fishable. Klamath and Nootka natives have settled in the middle of this region.\n \nMap by Garja for ESOC" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

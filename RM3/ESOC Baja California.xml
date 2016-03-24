@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Baja California" 
+detailsText = "Arid peninsular region divided by a mountain range.\nMap by Garja" 
+loadDetailsText = "Baja California is a arid peninsular region divided in two by a mountain range. Hunts and trees are scarce and scattered, but precious metals are rather common. Expand toward the center or on the sea to ensure extra resources for your colony.\n \nMap by Garja for ESOC" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

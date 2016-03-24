@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Bengal" 
+detailsText = "The sundarbans of the Bay of Bengal.\nMap by Garja" 
+loadDetailsText = "Make your way through the mangrove forest to get access to further resources. There are no trade routes in this region but Bhatki devotes may join your cause.\n \nMap by Garja for ESOC" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 

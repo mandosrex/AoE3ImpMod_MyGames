@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo 
+imagepath = "ui\random_map\unknown" 
+displayName = "Arkansas" 
+detailsText = "Dense forests and plenty of resources in this part of the Ozarks.\nMap by Garja" 
+loadDetailsText = "Players start next to a fordable river in a zone of dense forest. Resources are generous but scattered in the maze of the Ozarks. Take an aggressive approach to secure additional portions of the map and also don't forget the plateau across the river.\n \nMap by Garja for ESOC" 
+loadBackground="ui\random_map\unknown\unknown_map">
+   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
+   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+</mapinfo>
+
+ 
